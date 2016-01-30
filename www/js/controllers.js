@@ -1,6 +1,35 @@
 var app = angular.module('starter.controllers', []);
 
-app.controller('HomeCtrl', function ($scope, CategoriesService) {
+app.controller('SearchCtrl', function ($scope, SearchService, JSONService) {
+    $scope.Search = function (searchText) {
+        this.textSearch = null;
+        SearchService.findSearch(searchText).then(function (results) {
+            var x2js = new X2JS();
+            var jsonObject = x2js.xml_str2json(results.data);
+            var resultsSorted = JSONService.sortJSON(jsonObject.markers.marker, 'name');
+            facilities = resultsSorted;
+            console.log(facilities);
+            $scope.resultsSearch = resultsSorted;
+        })
+    }
+})
+
+app.controller('FacilityCtrl', function ($scope, $stateParams, FacilityService) {
+    var ID = $stateParams.facilityID;
+    FacilityService.findFacility(ID).then(function(result){
+        console.log(result.data);
+        var x2js = new X2JS();
+        var jsonObject = x2js.xml_str2json(result.data);
+        console.log(jsonObject);
+        $scope.facility = jsonObject.facility;
+    })
+})
+
+app.controller('NearByCtrl', function ($scope) {
+
+})
+
+app.controller('CategoriesCtrl', function ($scope, CategoriesService) {
     $scope.categories = CategoriesService.all();
 })
 
@@ -20,7 +49,7 @@ app.controller('CategoryCtrl', function ($scope, $stateParams, CategoryService) 
     })
 })
 
-app.controller('CategoryResults', function ($scope, $stateParams, ResultsCategoryService) {
+app.controller('CategoryResults', function ($scope, $stateParams, ResultsCategoryService, JSONService) {
     var catResultsName = $stateParams.catResultsName;
     console.log(catResultsName);
 
@@ -32,7 +61,7 @@ app.controller('CategoryResults', function ($scope, $stateParams, ResultsCategor
         angular.forEach(jsonObject.markers.marker, function (value, key) {
             console.log("Name: " + value.name);
         })
-        var resultsSorted = ResultsCategoryService.sortJSON(jsonObject.markers.marker, 'name');
+        var resultsSorted = JSONService.sortJSON(jsonObject.markers.marker, 'name');
         $scope.results = resultsSorted;
     })
 })

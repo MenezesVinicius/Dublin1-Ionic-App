@@ -24,18 +24,42 @@ app.run(function ($ionicPlatform) {
 })
 
 app.config(function ($stateProvider, $urlRouterProvider) {
-
-    // Ionic uses AngularUI Router which uses the concept of states
-    // Learn more here: https://github.com/angular-ui/ui-router
-    // Set up the various states which the app can be in.
-    // Each state's controller can be found in controllers.js
     $stateProvider
-
         // setup an abstract state for the tabs directive
         .state('app', {
             url: '/app',
             abstract: true,
             templateUrl: 'templates/tabs.html'
+        })
+
+        .state('app.search', {
+            url: '/search',
+            views: {
+                'app-search': {
+                    templateUrl: 'templates/search/search.html',
+                    controller: 'SearchCtrl'
+                }
+            }
+        })
+
+        .state('app.searchFacility', {
+            url: '/search/:facilityID',
+            views: {
+                'app-search': {
+                    templateUrl: 'templates/search/facility.html',
+                    controller: 'FacilityCtrl'
+                }
+            }
+        })
+
+        .state('app.nearBy', {
+            url: '/nearBy',
+            views: {
+                'app-nearBy': {
+                    templateUrl: 'templates/nearBy/nearBy.html',
+                    controller: 'NearByCtrl'
+                }
+            }
         })
 
         // Each tab has its own nav history stack:
@@ -44,8 +68,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: '/categories',
             views: {
                 'app-categories': {
-                    templateUrl: 'templates/tab-categories.html',
-                    controller: 'HomeCtrl'
+                    templateUrl: 'templates/categories/tab-categories.html',
+                    controller: 'CategoriesCtrl'
                 }
             }
         })
@@ -54,18 +78,28 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: '/categories/:categoryID',
             views: {
                 'app-categories': {
-                    templateUrl: 'templates/category.html',
+                    templateUrl: 'templates/categories/category.html',
                     controller: 'CategoryCtrl'
                 }
             }
         })
 
         .state('app.category-results', {
-            url: '/category/:catResultsName',
+            url: '/categories/category/:catResultsName',
             views: {
                 'app-categories': {
-                    templateUrl: 'templates/category-results.html',
+                    templateUrl: 'templates/categories/category-results.html',
                     controller: 'CategoryResults'
+                }
+            }
+        })
+
+        .state('app.catFacility', {
+            url: '/categories/category/facility/:facilityID',
+            views: {
+                'app-categories': {
+                    templateUrl: 'templates/categories/facility.html',
+                    controller: 'FacilityCtrl'
                 }
             }
         })
@@ -74,7 +108,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: '/bookmarks',
             views: {
                 'app-bookmarks': {
-                    templateUrl: 'templates/tab-bookmarks.html',
+                    templateUrl: 'templates/bookmarks/tab-bookmarks.html',
                     controller: 'BookMarksCtrl'
                 }
             }
@@ -84,7 +118,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: '/settings',
             views: {
                 'app-settings': {
-                    templateUrl: 'templates/tab-settings.html',
+                    templateUrl: 'templates/settings/tab-settings.html',
                     controller: 'SettingsCtrl'
                 }
             }

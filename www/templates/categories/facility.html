@@ -1,0 +1,49 @@
+<ion-view view-title="Facility">
+    <ion-content>
+        <div class="list card">
+            <div class="item item-divider text-center">
+                {{facility.name}}
+            </div>
+            <div ng-show="facility.locality!=''" class="item item-text-wrap">
+                Locality: {{facility.locality}}
+            </div>
+            <div ng-show="facility.street!=''" class="item item-text-wrap">
+                Street: {{facility.street}}
+            </div>
+            <div ng-show="facility.postcode!=''" class="item item-text-wrap">
+                Postcode: {{facility.postcode}}
+            </div>
+            <div ng-show="facility.buildingNumber!=''" class="item item-text-wrap">
+                Building Number: {{facility.buildingNumber}}
+            </div>
+            <div ng-show="facility.openingHours!=''" class="item item-text-wrap">
+                Opening Hours: {{facility.openingHours}}
+            </div>
+            <div ng-show="facility.email!=''" class="item item-text-wrap">
+                Email: {{facility.email}}
+            </div>
+            <div ng-show="facility.url!=''" class="item item-text-wrap">
+                Site: {{facility.url}}
+            </div>
+            <div ng-show="facility.moreInfo!=''" class="item item-text-wrap">
+                More Info: {{facility.moreInfo}}
+            </div>
+            <div class="item item-divider">
+                <div class="button-bar">
+                    <a class="button button-assertive" href="tel:{{facility.phone}}">
+                        <i class="icon ion-android-call"></i>
+                    </a>
+                    <a class="button button-positive" href="{{facility.url}}" onclick="window.open(this.href, '_system', 'location=yes'); return false;">
+                        <i class="icon ion-earth"></i>
+                    </a>
+                    <a class="button button-balanced" href="http://maps.google.com/maps?saddr=Current%20Location&daddr={{facility.lat}},{{facility.lng}}" onclick="window.open(this.href, '_system', 'location=yes'); return false;">
+                        <i class="icon ion-location"></i>
+                    </a>
+                    <a class="button button-energized" href="#">
+                        <i class="icon ion-android-star"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

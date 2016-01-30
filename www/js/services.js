@@ -2,6 +2,44 @@ var keyAPI = "ef1b2b0d52a115f0a9d8b8a6e92b4119";
 var baseURL = "http://www.dublin.ie/maps/api.php?apikey=" + keyAPI;
 var app = angular.module('starter.services', []);
 
+app.factory('SearchService', function ($http) {
+    return {
+        findSearch: function (search) {
+            var promise = $http({
+                method: 'GET',
+                url: baseURL + "&action=getFacilities&what=" + search + "&page=showAll",
+                crossDomain: true
+            });
+
+            promise.success(function (data) {
+                console.log(data);
+            }).error(function (err) {
+                console.log(err);
+            });
+            return promise;
+        }
+    }
+})
+
+app.factory('FacilityService', function ($http) {
+    return {
+        findFacility: function (ID) {
+            var promise = $http({
+                method: 'GET',
+                url: baseURL + "&action=getFacility&id=" + ID,
+                crossDomain: true
+            });
+
+            promise.success(function (data) {
+                console.log(data);
+            }).error(function (err) {
+                console.log(err);
+            });
+            return promise;
+        }
+    }
+})
+
 app.factory('CategoriesService', function () {
     var Categories = [{
         id: 1,
@@ -82,8 +120,12 @@ app.factory('ResultsCategoryService', function ($http) {
                 console.log(err);
             });
             return promise;
-        },
+        }
+    }
+});
 
+app.factory('JSONService', function () {
+    return {
         sortJSON: function sortByKey(array, key) {
             return array.sort(function (a, b) {
                 var x = a[key];
@@ -93,6 +135,3 @@ app.factory('ResultsCategoryService', function ($http) {
         }
     }
 });
-
-
-
