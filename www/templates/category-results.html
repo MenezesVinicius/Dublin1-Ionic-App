@@ -1,0 +1,9 @@
+<ion-view view-title="Results">
+    <ion-content>
+        <ion-list>
+            <ion-item ng-repeat="result in results" type="item-text-wrap" href="#/app/category/{{result.id}}">
+                <p>{{result.name}}</p>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

@@ -40,46 +40,56 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 
         // Each tab has its own nav history stack:
 
-        .state('app.dash', {
-            url: '/dash',
+        .state('app.categories', {
+            url: '/categories',
             views: {
-                'app-dash': {
-                    templateUrl: 'templates/tab-dash.html',
+                'app-categories': {
+                    templateUrl: 'templates/tab-categories.html',
                     controller: 'HomeCtrl'
                 }
             }
         })
 
-        .state('app.chats', {
-            url: '/chats',
+        .state('app.category', {
+            url: '/categories/:categoryID',
             views: {
-                'app-chats': {
-                    templateUrl: 'templates/tab-chats.html',
-                    controller: 'ChatsCtrl'
-                }
-            }
-        })
-        .state('app.chat-detail', {
-            url: '/chats/:chatId',
-            views: {
-                'app-chats': {
-                    templateUrl: 'templates/chat-detail.html',
-                    controller: 'ChatDetailCtrl'
+                'app-categories': {
+                    templateUrl: 'templates/category.html',
+                    controller: 'CategoryCtrl'
                 }
             }
         })
 
-        .state('app.account', {
-            url: '/account',
+        .state('app.category-results', {
+            url: '/category/:catResultsName',
             views: {
-                'app-account': {
-                    templateUrl: 'templates/tab-account.html',
-                    controller: 'AccountCtrl'
+                'app-categories': {
+                    templateUrl: 'templates/category-results.html',
+                    controller: 'CategoryResults'
+                }
+            }
+        })
+
+        .state('app.bookmarks', {
+            url: '/bookmarks',
+            views: {
+                'app-bookmarks': {
+                    templateUrl: 'templates/tab-bookmarks.html',
+                    controller: 'BookMarksCtrl'
+                }
+            }
+        })
+
+        .state('app.settings', {
+            url: '/settings',
+            views: {
+                'app-settings': {
+                    templateUrl: 'templates/tab-settings.html',
+                    controller: 'SettingsCtrl'
                 }
             }
         });
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/dash');
-
+    $urlRouterProvider.otherwise('/app/categories');
 });
